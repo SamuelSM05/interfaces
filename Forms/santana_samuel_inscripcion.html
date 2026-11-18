@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscripción</title>
+</head>
+
+<body>
+    <form action="procesar.php" method="post">
+        <fieldset>
+            <legend>Datos personales</legend>
+
+            <label for="name">Nombre:</label>
+            <input type="text" name="name" id="name" minlength="2" maxlength="40" autofocus required>
+            <br><br>
+            <label for="surname">Apellidos:</label>
+            <input type="text" name="surname" id="surname" maxlength="60" required>
+            <br><br>
+            <label for="dni-nie">DNI / NIE</label>
+            <input type="text" name="dni-nie" id="dni-nie" required pattern="([1-9]{8}[A-Z]|^[XYZ][1-9]{7}[A-Z])"
+                placeholder="12345678A / X1234567B">
+            <br><br>
+            <label for="birthdate">Fecha de nacimiento:</label>
+            <input type="date" name="birthdate" id="birthdate" min="1960-01-01" max="2010-12-31" required>
+            <br><br>
+            <label for="email">Correo electrónico:</label>
+            <input type="email" name="email" id="email" autocomplete="email" required>
+            <br><br>
+            <label for="tlpnumber">Teléfono movil:</label>
+            <input type="number" name="tlpnumber" id="tlpnumber" minlength="9" maxlength="9" pattern="[67][0-9]{8}">
+            <br><br>
+            <label for="postcode">Codigo Postal:</label>
+            <input type="text" name="postcode" id="postcode" minlength="5" maxlength="5" pattern="(38|35)[0-9]{3}">
+            <br><br>
+            <label for="town">Municipio:</label>
+            <input type="text" name="town" id="town" list="towns">
+            <datalist id="towns">
+                <option value="Adeje">
+                <option value="Arona">
+                <option value="Granadilla de Abona">
+                <option value="San Miguel de Abona">
+                <option value="Santa Cruz de Tenerife">
+                <option value="San Cristóbal de La Laguna">
+            </datalist>
+        </fieldset>
+        <br>
+        <fieldset>
+            <legend>Cuenta de acceso</legend>
+            <label for="username">Nombre de usuario:</label>
+            <input type="text" name="username" id="username" pattern="[a-z][a-z0-9]{4-11}" required>
+            <br><br>
+            <label for="password">Contraseña:</label>
+            <input type="password" name="password" id="password" required pattern="(?=.*[0-9])[A-Za-z0-9]{8,}"
+                autocomplete="new-password">
+            <br><br>
+            <label for="repeat-password">Repetir contraseña:</label>
+            <input type="password" name="repeat-password" id="repeat-password" autocomplete="new-password" required>
+        </fieldset>
+        <br>
+        <fieldset>
+            <legend>Taller</legend>
+            <label for=""></label>
+        </fieldset>
+        <fieldset>
+            <legend>Datos de control</legend>
+        </fieldset>
+    </form>
+</body>
+
+</html>

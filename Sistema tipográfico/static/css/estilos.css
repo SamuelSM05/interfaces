@@ -1,5 +1,6 @@
 /* PASO 4.2: @import de la fuente descartada.
    Tiene que ser la primera línea del archivo. */
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Syne+Mono&display=swap');
 
 /* PASO 4.3: un @font-face por cada archivo de la fuente de texto */
 @font-face {
@@ -54,6 +55,6 @@ p {
   max-width: 65ch;
 }
 
-.descartada {
-  font-family: "Nombre de la fuente descartada", sans-serif;
+.descartada h2,p {
+  font-family: "Syne Mono", sans-serif;
 }
