@@ -8,7 +8,8 @@
 </head>
 
 <body>
-    <form action="procesar.php" method="post">
+    <form action="procesar.php" method="post" enctype="multipart/form-data"
+        oninput="salida.value = nivel.value">
         <fieldset>
             <legend>Datos personales</legend>
 
@@ -19,7 +20,8 @@
             <input type="text" name="surname" id="surname" maxlength="60" required>
             <br><br>
             <label for="dni-nie">DNI / NIE</label>
-            <input type="text" name="dni-nie" id="dni-nie" required pattern="([1-9]{8}[A-Z]|^[XYZ][1-9]{7}[A-Z])"
+            <input type="text" name="dni-nie" id="dni-nie" required maxlength="9"
+                pattern="([0-9]{8}[A-Z]|[XYZ][0-9]{7}[A-Z])"
                 placeholder="12345678A / X1234567B">
             <br><br>
             <label for="birthdate">Fecha de nacimiento:</label>
@@ -29,10 +31,11 @@
             <input type="email" name="email" id="email" autocomplete="email" required>
             <br><br>
             <label for="tlpnumber">Teléfono movil:</label>
-            <input type="number" name="tlpnumber" id="tlpnumber" minlength="9" maxlength="9" pattern="[67][0-9]{8}">
+            <input type="text" name="tlpnumber" id="tlpnumber" pattern="[67][0-9]{8}" inputmode="numeric">
             <br><br>
             <label for="postcode">Codigo Postal:</label>
-            <input type="text" name="postcode" id="postcode" minlength="5" maxlength="5" pattern="(38|35)[0-9]{3}">
+            <input type="text" name="postcode" id="postcode" minlength="5" maxlength="5"
+                pattern="(35|38)[0-9]{3}" required>
             <br><br>
             <label for="town">Municipio:</label>
             <input type="text" name="town" id="town" list="towns">
@@ -49,24 +52,106 @@
         <fieldset>
             <legend>Cuenta de acceso</legend>
             <label for="username">Nombre de usuario:</label>
-            <input type="text" name="username" id="username" pattern="[a-z][a-z0-9]{4-11}" required>
+            <input type="text" name="username" id="username" pattern="[a-z][a-z0-9]{4,11}" required>
             <br><br>
             <label for="password">Contraseña:</label>
             <input type="password" name="password" id="password" required pattern="(?=.*[0-9])[A-Za-z0-9]{8,}"
                 autocomplete="new-password">
             <br><br>
             <label for="repeat-password">Repetir contraseña:</label>
-            <input type="password" name="repeat-password" id="repeat-password" autocomplete="new-password" required>
+            <input type="password" name="repeat-password" id="repeat-password" required
+                pattern="(?=.*[0-9])[A-Za-z0-9]{8,}" autocomplete="new-password">
         </fieldset>
         <br>
         <fieldset>
             <legend>Taller</legend>
-            <label for=""></label>
+            <label for="workshop">Taller:</label>
+            <select name="workshop" id="workshop" required>
+                <option value="">— Elige un taller —</option>
+                <optgroup label="Iniciación">
+                    <option value="introduccion-html">Introducción a HTML</option>
+                    <option value="diseno-figma">Diseño con Figma</option>
+                    <option value="primera-web">Tu primera web</option>
+                </optgroup>
+                <optgroup label="Avanzado">
+                    <option value="accesibilidad-web">Accesibilidad web</option>
+                    <option value="formularios-validacion">Formularios y validación</option>
+                    <option value="git-equipos">Git para equipos</option>
+                </optgroup>
+            </select>
+            <br><br>
+            <span>Modalidad:</span>
+            <input type="radio" name="modality" id="in-person" value="presencial" checked>
+            <label for="in-person">Presencial</label>
+            <input type="radio" name="modality" id="online" value="online">
+            <label for="online">Online</label>
+            <input type="radio" name="modality" id="hybrid" value="hibrida">
+            <label for="hybrid">Híbrida</label>
+            <br><br>
+            <span>Intereses:</span>
+            <input type="checkbox" name="interests[]" id="frontend" value="frontend">
+            <label for="frontend">Frontend</label>
+            <input type="checkbox" name="interests[]" id="backend" value="backend">
+            <label for="backend">Backend</label>
+            <input type="checkbox" name="interests[]" id="ux-ui" value="diseno-ux-ui">
+            <label for="ux-ui">Diseño UX/UI</label>
+            <input type="checkbox" name="interests[]" id="cybersecurity" value="ciberseguridad">
+            <label for="cybersecurity">Ciberseguridad</label>
+            <br><br>
+            <label for="nivel">Nivel de experiencia:</label>
+            <input type="range" name="nivel" id="nivel" min="0" max="10" step="1" value="3">
+            <output name="salida" for="nivel">3</output>
+            <br><br>
+            <label for="favorite-language">Lenguaje favorito:</label>
+            <input type="text" name="favorite-language" id="favorite-language" list="languages">
+            <datalist id="languages">
+                <option value="HTML">
+                <option value="CSS">
+                <option value="JavaScript">
+                <option value="Python">
+                <option value="PHP">
+                <option value="Java">
+            </datalist>
+            <br><br>
+            <label for="badge-color">Color de la acreditación:</label>
+            <input type="color" name="badge-color" id="badge-color" value="#1b9e85">
+            <br><br>
+            <label for="photo">Foto para la acreditación:</label>
+            <input type="file" name="photo" id="photo" accept="image/*" required>
+            <br><br>
+            <label for="companions">Acompañantes:</label>
+            <input type="number" name="companions" id="companions" min="0" max="3" step="1" value="0">
+            <br><br>
+            <label for="portfolio">Portfolio:</label>
+            <input type="url" name="portfolio" id="portfolio" placeholder="https://…">
+            <br><br>
+            <label for="comments">Comentarios:</label>
+            <textarea name="comments" id="comments" rows="4" maxlength="300"
+                placeholder="Escribe aquí tus comentarios"></textarea>
         </fieldset>
+        <br>
         <fieldset>
             <legend>Datos de control</legend>
+            <label for="request-code">Código de solicitud:</label>
+            <input type="text" name="request-code" id="request-code" value="JT-0001" readonly>
+            <br><br>
+            <label for="discount">Descuento aplicado:</label>
+            <input type="text" id="discount" value="0 %" disabled>
+            <input type="hidden" name="edition" value="JT-2027">
+            <br><br>
+            <input type="checkbox" name="terms" id="terms" required>
+            <label for="terms">Acepto las normas</label>
         </fieldset>
+        <br>
+        <button type="submit">Enviar inscripción</button>
+        <button type="reset" accesskey="q">Restablecer formulario</button>
     </form>
+<!--     
+    1. (?=.*[0-9]) comprueba que haya al menos un dígito. [A-Za-z0-9] permite solo letras y números, y {8,} exige un mínimo de 8 caracteres.
+    2. HTML valida cada campo por separado, pero no compara sus valores.
+    3. El código de solicitud (readonly) y la edición (hidden) se envían. El descuento (disabled) no se envía. La casilla de normas se envía solo si está marcada.
+    4. La validación del navegador se puede modificar o evitar, el servidor debe validar de nuevo los datos recibidos para garantizar su integridad.
+    -->
 </body>
 
 </html>
